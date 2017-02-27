@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :surveys, dependent: :destroy
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+  devise :database_authenticatable, 
+          :trackable
          #:validatable
 end
