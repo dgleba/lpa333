@@ -13,6 +13,8 @@
 ActiveRecord::Schema.define(version: 20161104194613) do
 
   create_table "answers", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
     t.integer  "choice_id"
     t.integer  "question_id"
     t.integer  "response_id"
@@ -23,6 +25,7 @@ ActiveRecord::Schema.define(version: 20161104194613) do
     t.text     "action"
     t.index ["choice_id"], name: "index_answers_on_choice_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
     t.index ["response_id"], name: "index_answers_on_response_id"
   end
 
@@ -36,7 +39,8 @@ ActiveRecord::Schema.define(version: 20161104194613) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string   "question_list_id"
+    t.string   "title"
+    t.integer   "question_list_id"
     t.integer  "sort"
     t.integer  "qtype"
     t.integer  "survey_id"
@@ -52,8 +56,8 @@ ActiveRecord::Schema.define(version: 20161104194613) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
-  
+
+
   create_table "surveys", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at", null: false
@@ -61,7 +65,7 @@ ActiveRecord::Schema.define(version: 20161104194613) do
     t.integer  "user_id"
   end
 
-  
+
   create_table "responses", force: :cascade do |t|
     t.integer  "survey_id"
     t.integer  "user_id"
@@ -69,7 +73,7 @@ ActiveRecord::Schema.define(version: 20161104194613) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["survey_id"], name: "index_responses_on_survey_id"
-    t.index ["user_id"], name: "index_answers_on_user_id"
+    t.index ["user_id"], name: "index_responses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
